@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Серіали</title>
+        <link rel="stylesheet" href="{% static 'home/css/styles_serial_shablon.css' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    </head>
+    <body>
+        <header>
+            <div class="All_navbar">
+                <div class="Name">
+                    <h1>Tind.Corp</h1>
+                </div>
+                <div class="top_menu">
+                    <ul>
+                        <li>
+                            <a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'serials' %}">Serial</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'films' %}">Films</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search">
+                <form action="{% url 'search_qqq' %}" method="POST" id="autocomplete">
+
+                    {% csrf_token %}
+
+                    <input type="search" name="searched" placeholder="Пошук"  id="products">
+                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/> </svg>
+                    </button>
+                    <ul class="autocomplete-result-list"></ul>
+                </form>
+                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+                <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+                <script>
+                  $( function() {
+                    $( "#products" ).autocomplete({
+                      source: "{% url 'search_qqq' %}"
+                    });
+                  } );
+                </script>
+            </div>
+            </div>
+        </header>
+        <div class="All_plane">
+            <div class="Name_and_end">
+                <h1>{{ list_shablon.title }}</h1>
+                <h2>{{ list_shablon.serias }}</h2>
+            </div>
+            <div class="Photo_and_trailer">
+                <img class="photo" src={{ list_shablon.poster.url }} alt="peaky_blinders">
+                <button class="button_trailer">
+                    <a href="https://www.youtube.com/watch?v=oVzVdvGIC7U" target="_blank">Переглянути трейлер</a>
+                </button>
+            </div>
+            <div class="info">
+                <div class="top">
+                    <h3>Входить в топ:</h3>
+                    <ul>
+                        <li>{{ list_shablon.top1 }}</li>
+                        <li>{{ list_shablon.top2 }}</li>
+                        <li>{{ list_shablon.top3 }}</li>
+                    </ul>
+                    <br><br>
+                </div>
+                <div class="year">
+                    <h3>Рік випуску:</h3>
+                    <ul>
+                        <li>{{ list_shablon.years_go }}</li>
+                    </ul>
+                    <br><br>
+                </div>
+                <div class="country">
+                    <h3>Країна:</h3>
+                    <ul>
+                        <li>{{ list_shablon.country }}</li>
+                    </ul>
+                    <br><br>
+                </div>
+                <div class="djanr">
+                    <h3>Жанри:</h3>
+                    <ul>
+                        <li>{{ list_shablon.djanrs }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="about">
+                <h2>Про що серіал:</h2>
+                <p>
+                    {{ list_shablon.about }}
+                </p>
+            </div>
+        </div>
+        <div class="series">
+            {% for i in list_serias %}
+                <button class="button_serias" data-src="{% url 'stream' i.id %}">{{ i.title_series }}</button>
+            {% endfor %}
+        </div>
+        <div class="player paused" data-volumelevel="high">
+            <div class="thumbnail_img">
+
+            </div>
+            <div class="controls_div">
+                <div class="timeline_div">
+                    <div class="timeline">
+                        <p class="preview-time">dasdasd</p>
+                        <div class="thumb_indicator"></div>
+                    </div>
+                </div>
+                    <div class="controls">
+                    <div class="play-pause">
+                        <button class="play-pause_button">
+                            <svg class="play-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M8,5.14V19.14L19,12.14L8,5.14Z" />
+                            </svg>
+                            <svg class="pause-icon" viewBox="0 0 24 24">
+                                <path fill="currentColor" d="M14,19H18V5H14M6,19H10V5H6V19Z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="volume_div">
+                        <button class="volume">
+                            <svg class="volume-high-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" />
+                            </svg>
+                            <svg class="volume-low-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5,9V15H9L14,20V4L9,9M18.5,12C18.5,10.23 17.5,8.71 16,7.97V16C17.5,15.29 18.5,13.76 18.5,12Z" />
+                            </svg>
+                            <svg class="volume-muted-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" />
+                            </svg>
+                        </button>
+                        <input class="volume_range" type="range" min="0" max="1" step="any" value="1">
+                    </div>
+                    <div class="duration_div">
+                        <div class="start_time">0:00</div>
+                        /
+                        <div class="end_time"></div>
+                    </div>
+                    <button class="speed wide-btn">
+                        1x
+                    </button>
+                    <button class="mini_player">
+                        <svg viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14zm-10-7h9v6h-9z"/>
+                        </svg>
+                    </button>
+                    <button class="full_screen">
+                        <svg class="open" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                        </svg>
+                        <svg class="close" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <video
+                id="my-video"
+                class="video-js"
+                preload="auto"
+                data-setup="{}"
+            >
+
+                <source src="{% url 'stream' list_serias.0.id %}" type="video/mp4"/>
+            </video>
+        </div>
+        <script src="{% static 'home/js/js_serial_film_shablon.js' %}" defer></script>
+        <div class="about_me">
+            <div class="about_me_black">
+                <div class="Logo">
+                    <h1>Tind.Corp</h1>
+                </div>
+                <div class="numbers">
+                    <h2 class="numbers">+380 00 000 00 00</h2>
+                    <h2 class="numbers">+380 00 000 00 00</h2>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Вітаємо на сайті!</title>
+        <link rel="stylesheet" href="{% static 'home/css/styles_home.css' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    </head>
+    <body>
+        <header>
+            <div class="All_navbar">
+                <div class="Name">
+                    <h1>Tind.Corp</h1>
+                </div>
+                <div class="top_menu">
+                    <ul>
+                        <li>
+                            <a href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'serials' %}">Serial</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'films' %}">Films</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="search">
+                <form action="{% url 'search_qqq' %}" method="POST" id="autocomplete">
+
+                    {% csrf_token %}
+
+                    <input type="search" name="searched" placeholder="Пошук"  id="products">
+                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/> </svg>
+                    </button>
+                    <ul class="autocomplete-result-list"></ul>
+                </form>
+                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+                <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+                <script>
+                  $( function() {
+                    $( "#products" ).autocomplete({
+                      source: "{% url 'search_qqq' %}"
+                    });
+                  } );
+                </script>
+            </div>
+            </div>
+        </header>
+        <div class="Home">
+            <h1>Вітаємо вас на сайті для перегляду фільмів.</h1>
+            <h2>Тут є багато культових фільмів та серіалів.</h2>
+            <h2>
+                Сайт був розроблений для того щоб дивитись фільми і серіали безкоштовно.
+                Я брав натхнення з сайту hdrezka.
+            </h2>
+            <a href="https://rezka.ag/series/drama/1929-ostrye-kozyrki-2013.html"> hdrezka.com </a>
+            <div class="lang">
+                <h3>Мови на якій писав сайт:</h3>
+                <ul>
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=fHl7UyRjOf0&list=PLDyJYA6aTY1kJIwbYHzGOuvSMNTfqksmk&ab_channel=%D0%A8%D0%BA%D0%BE%D0%BB%D0%B0itProger%2F%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">Java Sсript</a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=Rr9QmVLqoP4&list=PLenwk9TUJzJ6ep0oogRRQZHzPMtTGKqF1&ab_channel=SavchukIT" target="_blank">HTML + CSS</a>
+                    </li>
+                    <li>
+                        <a href="https://www.youtube.com/watch?v=L-FyeHQwo4U&list=PLDyJYA6aTY1nZ9fSGcsK4wqeu-xaJksQQ&ab_channel=%D0%A8%D0%BA%D0%BE%D0%BB%D0%B0itProger%2F%D0%9F%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5" target="_blank">Django</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="facts">
+                <h3>Факти про сайт:</h3>
+                <ul>
+                    <li>
+                        Спочатку хотів вивчити веб, потім задумався про Django а потім взагалі вирішив робити повний сайт
+                    </li>
+                    <li>
+                        Проект придумав ще давно, коли надоїла реклама на сайтах
+                    </li>
+                    <li>
+                        Писав з нуля, без знать HTML, CSS, JS і Django
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="peaky_about_me">
+            <div class="peaky_about_me_black">
+                <div class="Logo">
+                    <h1>Tind.Corp</h1>
+                </div>
+                <div class="numbers">
+                    <h2 class="numbers">+380 00 000 00 00</h2>
+                    <h2 class="numbers">+380 00 000 00 00</h2>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

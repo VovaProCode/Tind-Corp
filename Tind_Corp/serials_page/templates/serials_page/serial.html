@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Serial_page</title>
+    <link rel="stylesheet" href="{% static 'home/css/styles_serial_film.css' %}">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+</head>
+<body>
+    <header>
+        <div class="All_navbar">
+            <div class="Name">
+                <h1>Tind.Corp</h1>
+            </div>
+            <div class="top_menu">
+                <ul>
+                    <li>
+                        <a href="{% url 'home' %}">Home</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'serials' %}">Serial</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'films' %}">Films</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search">
+                <form action="{% url 'search_qqq' %}" method="POST" id="autocomplete">
+
+                    {% csrf_token %}
+
+                    <input type="search" name="searched" placeholder="Пошук"  id="products">
+                    <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16"> <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/> </svg>
+                    </button>
+                    <ul class="autocomplete-result-list"></ul>
+                </form>
+                <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+                <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+                <script>
+                  $( function() {
+                    $( "#products" ).autocomplete({
+                      source: "{% url 'search_qqq' %}"
+                    });
+                  } );
+                </script>
+            </div>
+        </div>
+    </header>
+    <div class="defoult_serials_div">
+        {% for el in serials_list %}
+            <div class="defoult_serials">
+                <a href="{% url 'serials_id' el.slug %}">
+                    <img src={{ el.poster.url }} alt="sdadsd" class="defoult_photo">
+                </a>
+                <a href="{% url 'serials_id' el.slug %}">{{el.title}}</a>
+                <div class="defoult_reitings">
+                    <p>{{el.djanrs}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
