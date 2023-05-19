@@ -39,14 +39,15 @@ def Search_django(request):
         return render(request, "serials_page/search.html", {})#Якщо користувач нічого не ввів то буде звичайний рендер сторінки
 
 #Функція для перемотки відео
-def get_streaming_video(request, slug):
-    file, status_code, content_length, content_range = open_file(request, slug)
+def get_streaming_video(request, id):
+    file, status_code, content_length, content_range = open_file(request, id)
     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
 
     response['Accept-Ranges'] = 'bytes'
     response['Content-Length'] = str(content_length)
     response['Cache-Control'] = 'no-cache'
     response['Content-Range'] = content_range
+
     return response
 
 

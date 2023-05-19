@@ -56,7 +56,6 @@ document.addEventListener("keydown", e => {
 })
 video.addEventListener("dblclick", togglefull)
 var A;
-console.log(A)
 timeline_div.addEventListener("mouseout", () => {
     start_time.textContent = formatDuration(video.currentTime)
     A = 1
@@ -64,12 +63,10 @@ timeline_div.addEventListener("mouseout", () => {
 
 timeline_div.addEventListener("mouseover", () => {
     A = 0
-    console.log(A)
 });
 
 video.addEventListener("timeupdate", () => {
     if (A === 0){
-        console.log("Вишоооов")
     }else{
         start_time.textContent = formatDuration(video.currentTime)
     }
@@ -183,7 +180,6 @@ function togglevolume() {
 
 video.addEventListener("volumechange", () => {
     volume_range.value = video.volume
-    console.log(volume_range.value)
     let volumelevel
     if (video.muted || video.volume == 0){
         volume_range.value = 0
@@ -253,6 +249,7 @@ function hideControls() {
   controls.style.display = 'none';
   video.style.cursor = "none";
   controls.style.cursor = "auto";
+  controls_div.style.opacity = "0";
 }
 
 // Функция для показа элементов управления видео
@@ -262,6 +259,7 @@ function showControls() {
  video.style.cursor = "auto";
  controls.style.cursor = "auto";
  controls_div.style.background = "linear-gradient(to top, rgba(0, 0, 0, .75), transparent)";
+ controls_div.style.opacity = "1";
 }
 
 // Функция для сброса таймера

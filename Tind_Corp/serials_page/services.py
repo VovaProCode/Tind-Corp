@@ -28,7 +28,7 @@ def ranged(
         file.close()
 
 
-def open_file(request, video_pk: str) -> tuple:
+def open_file(request, video_pk: int) -> tuple:
     _video = get_object_or_404(serias, pk=video_pk)
 
     path = Path(_video.video_series.path)

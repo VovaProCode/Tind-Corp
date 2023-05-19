@@ -27,10 +27,10 @@ def ranged(
         file.close()
 
 
-def open_file(request, video_pk: str) -> tuple:
+def open_file(request, video_pk: int) -> tuple:
     _video = get_object_or_404(films, pk=video_pk)
 
-    path = Path(_video.video_series.path)
+    path = Path(_video.video.path)
 
     file = path.open('rb')
     file_size = path.stat().st_size

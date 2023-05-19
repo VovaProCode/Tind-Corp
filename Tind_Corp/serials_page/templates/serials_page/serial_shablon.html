@@ -99,7 +99,7 @@
         </div>
         <div class="series">
             {% for i in list_serias %}
-                <button class="button_serias" data-src="{% url 'stream' i.id %}">{{ i.title_series }}</button>
+                <button class="button_serias" data-src="{% url 'stream_serials' i.id %}">{{ i.title_series }}</button>
             {% endfor %}
         </div>
         <div class="player paused" data-volumelevel="high">
@@ -168,7 +168,7 @@
                 data-setup="{}"
             >
 
-                <source src="{% url 'stream' list_serias.0.id %}" type="video/mp4"/>
+                <source src="{% url 'stream_serials' list_serias.0.id %}" type="video/mp4"/>
             </video>
         </div>
         <script src="{% static 'home/js/js_serial_film_shablon.js' %}" defer></script>
